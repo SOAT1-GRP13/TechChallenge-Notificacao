@@ -44,7 +44,6 @@ else
 
 builder.Services.Configure<Secrets>(builder.Configuration);
 
-builder.Services.AddAuthenticationJWT(secret);
 builder.Services.AddMemoryCache();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddSwaggerExamplesFromAssemblies(Assembly.GetEntryAssembly());
@@ -63,6 +62,7 @@ builder.Services.AddSingleton(serviceProvider =>
 builder.Services.AddSingleton<IRabbitMQService, RabbitMQService>();
 builder.Services.AddHostedService<PedidoPagoSubscriber>();
 builder.Services.AddHostedService<PedidoRecusadoSubscriber>();
+builder.Services.AddHostedService<PedidoProntoSubscriber>();
 
 builder.Services.RegisterServices();
 

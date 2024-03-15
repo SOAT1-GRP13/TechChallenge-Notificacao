@@ -10,13 +10,13 @@ using Microsoft.Extensions.Caching.Memory;
 
 namespace Application.Pedidos.Handlers
 {
-    public class NotificaPedidoPagamentoAprovadoCommandHandler : IRequestHandler<NotificaPedidoPagamentoAprovadoCommand, NotificacaoEnviadaPedidoDto?>
+    public class NotificaPedidoProntoCommandHandler : IRequestHandler<NotificaPedidoProntoCommand, NotificacaoEnviadaPedidoDto?>
     {
         private readonly IPedidoNotificacaoUseCase _pedidoNotificacaoUseCase;
         private readonly IMediatorHandler _mediatorHandler;
         private IMemoryCache _memoryCache;
 
-        public NotificaPedidoPagamentoAprovadoCommandHandler(
+        public NotificaPedidoProntoCommandHandler(
             IPedidoNotificacaoUseCase pedidoNotificacaoUseCase,
             IMediatorHandler mediatorHandler,
             IMemoryCache memoryCache
@@ -27,7 +27,7 @@ namespace Application.Pedidos.Handlers
             _memoryCache = memoryCache;
         }
 
-        public async Task<NotificacaoEnviadaPedidoDto?> Handle(NotificaPedidoPagamentoAprovadoCommand request, CancellationToken cancellationToken)
+        public async Task<NotificacaoEnviadaPedidoDto?> Handle(NotificaPedidoProntoCommand request, CancellationToken cancellationToken)
         {
             if (!request.EhValido())
             {
@@ -39,8 +39,8 @@ namespace Application.Pedidos.Handlers
             try
             {
                 var input = request.Input;
-                var notificacaoEnviada = await _pedidoNotificacaoUseCase.NotificaPagamentoAprovadoPedido(input.PedidoDto);
-               
+                var notificacaoEnviada = await _pedidoNotificacaoUseCase.NotificaPedidoPronto(input.PedidoDto);
+
                 if (notificacaoEnviada.StatusEnvioEmail == true)
                 {
                     var memoryCacheEntryOptions = new MemoryCacheEntryOptions
@@ -49,10 +49,7 @@ namespace Application.Pedidos.Handlers
                         SlidingExpiration = TimeSpan.FromMinutes(3)
                     };
 
-                    if(!_memoryCache.TryGetValue(input.PedidoDto.PedidoId, out NotificacaoEnviadaPedidoDto notificacao))
-                    {
-                        _memoryCache.Set(notificacaoEnviada.PedidoId, notificacaoEnviada, memoryCacheEntryOptions);
-                    }
+                    _memoryCache.Set(notificacaoEnviada.PedidoId, notificacaoEnviada, memoryCacheEntryOptions);
                 }
 
                 return notificacaoEnviada;

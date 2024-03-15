@@ -22,8 +22,7 @@ namespace Application.Pedidos.UseCases
         #region Pedido Notificacao Use Cases
         public async Task<NotificacaoEnviadaPedidoDto> NotificaPagamentoAprovadoPedido(PedidoDto pedidoDto)
         {
-            //TODO - get email cliente pelo id no servico de auth
-            var clientEmail = "rm348706@fiap.com.br";
+            var clientEmail = pedidoDto.ClienteEmail;
 
             var email = new EmailMessage
             {
@@ -34,7 +33,6 @@ namespace Application.Pedidos.UseCases
             var notificacaoEnviada = new NotificacaoEnviadaPedidoDto
             {
                 PedidoId = pedidoDto.PedidoId,
-                ClienteId = pedidoDto.ClienteId,
                 Email = clientEmail,
                 Mensagem = email.Body,
                 DataEnvio = DateTime.Now,
@@ -47,8 +45,7 @@ namespace Application.Pedidos.UseCases
 
         public async Task<NotificacaoEnviadaPedidoDto> NotificaPagamentoReprovadoPedido(PedidoDto pedidoDto)
         {
-            //TODO - get email cliente pelo id no servico de auth
-            var clientEmail = "rm348706@fiap.com.br";
+            var clientEmail = pedidoDto.ClienteEmail;
 
             var email = new EmailMessage
             {
@@ -59,7 +56,28 @@ namespace Application.Pedidos.UseCases
             var notificacaoEnviada = new NotificacaoEnviadaPedidoDto
             {
                 PedidoId = pedidoDto.PedidoId,
-                ClienteId = pedidoDto.ClienteId,
+                Email = clientEmail,
+                Mensagem = email.Body,
+                DataEnvio = DateTime.Now,
+                StatusEnvioEmail = await _emailSender.SendEmailAsync(email)
+
+            };
+            return notificacaoEnviada;
+        }
+
+        public async Task<NotificacaoEnviadaPedidoDto> NotificaPedidoPronto(PedidoDto pedidoDto)
+        {
+            var clientEmail = pedidoDto.ClienteEmail;
+
+            var email = new EmailMessage
+            {
+                To = clientEmail,
+                Body = "O seu pedido está pronto"
+            };
+
+            var notificacaoEnviada = new NotificacaoEnviadaPedidoDto
+            {
+                PedidoId = pedidoDto.PedidoId,
                 Email = clientEmail,
                 Mensagem = email.Body,
                 DataEnvio = DateTime.Now,

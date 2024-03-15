@@ -8,14 +8,14 @@ namespace Application.Pedidos.Boundaries
     {
         public PedidoInput(PedidoDto pedido)
         {
-            pedidoDto = pedido;
+            PedidoDto = pedido;
         }
 
         [Required]
         [SwaggerSchema(
             Title = "Guid do pedido",
             Format = "Guid")]
-        public PedidoDto pedidoDto { get; set; }
+        public PedidoDto PedidoDto { get; set; }
 
     }
 }

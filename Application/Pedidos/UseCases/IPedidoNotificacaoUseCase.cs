@@ -9,5 +9,7 @@ namespace Application.Pedidos.UseCases
 
         Task<NotificacaoEnviadaPedidoDto> NotificaPagamentoReprovadoPedido(PedidoDto pedidoDto);
 
+        Task<NotificacaoEnviadaPedidoDto> NotificaPedidoPronto(PedidoDto pedidoDto);
+
     }
 }

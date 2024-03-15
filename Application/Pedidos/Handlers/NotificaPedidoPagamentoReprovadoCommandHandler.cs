@@ -39,7 +39,7 @@ namespace Application.Pedidos.Handlers
             try
             {
                 var input = request.Input;
-                var notificacaoEnviada = await _pedidoUseCase.NotificaPagamentoReprovadoPedido(input.pedidoDto);
+                var notificacaoEnviada = await _pedidoUseCase.NotificaPagamentoReprovadoPedido(input.PedidoDto);
 
                 if (notificacaoEnviada.StatusEnvioEmail == true)
                 {
@@ -49,7 +49,7 @@ namespace Application.Pedidos.Handlers
                         SlidingExpiration = TimeSpan.FromMinutes(3)
                     };
 
-                    if (!_memoryCache.TryGetValue(input.pedidoDto.PedidoId, out NotificacaoEnviadaPedidoDto notificacao))
+                    if (!_memoryCache.TryGetValue(input.PedidoDto.PedidoId, out NotificacaoEnviadaPedidoDto notificacao))
                     {
                         _memoryCache.Set(notificacaoEnviada.PedidoId, notificacaoEnviada, memoryCacheEntryOptions);
                     }

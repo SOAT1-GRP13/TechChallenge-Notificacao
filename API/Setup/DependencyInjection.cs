@@ -11,7 +11,7 @@ using Infra.Services.EmailService;
 namespace API.Setup
 {
     public static class DependencyInjection
-    { 
+    {
         public static void RegisterServices(this IServiceCollection services)
         {
             //Mediator
@@ -25,6 +25,7 @@ namespace API.Setup
             services.AddScoped<IEmailSender, EmailSender>();
             services.AddScoped<IRequestHandler<NotificaPedidoPagamentoAprovadoCommand, NotificacaoEnviadaPedidoDto?>, NotificaPedidoPagamentoAprovadoCommandHandler>();
             services.AddScoped<IRequestHandler<NotificaPedidoPagamentoReprovadoCommand, NotificacaoEnviadaPedidoDto?>, NotificaPedidoPagamentoReprovadoCommandHandler>();
+            services.AddScoped<IRequestHandler<NotificaPedidoProntoCommand, NotificacaoEnviadaPedidoDto?>, NotificaPedidoProntoCommandHandler>();
 
         }
     }
