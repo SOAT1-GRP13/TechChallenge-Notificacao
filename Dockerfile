@@ -8,10 +8,10 @@ COPY ./API/*.csproj ./API/
 COPY ./Application/*.csproj ./Application/
 COPY ./Domain/*.csproj ./Domain/
 COPY ./Infra/*.csproj ./Infra/
-# COPY ./Tests/API.Tests/*.csproj ./Tests/API.Tests/
-# COPY ./Tests/Application.Tests/*.csproj ./Tests/Application.Tests/
-# COPY ./Tests/Domain.Tests/*.csproj ./Tests/Domain.Tests/
-# COPY ./Tests/Infra.Tests/*.csproj ./Tests/Infra.Tests/
+COPY ./Tests/API.Tests/*.csproj ./Tests/API.Tests/
+COPY ./Tests/Application.Tests/*.csproj ./Tests/Application.Tests/
+COPY ./Tests/Domain.Tests/*.csproj ./Tests/Domain.Tests/
+COPY ./Tests/Infra.Tests/*.csproj ./Tests/Infra.Tests/
 RUN dotnet restore
 
 # Definindo a variável de ambiente para o modo de compilação, padrão é Release
