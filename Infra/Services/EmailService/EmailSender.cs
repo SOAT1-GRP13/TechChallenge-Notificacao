@@ -3,6 +3,7 @@ using Application.Models.Email;
 using Microsoft.Extensions.Options;
 using SendGrid;
 using SendGrid.Helpers.Mail;
+using System.Threading.Tasks;
 
 
 namespace Infra.Services.EmailService
@@ -30,10 +31,11 @@ namespace Infra.Services.EmailService
         //    return response.IsSuccessStatusCode;
         //}
 
+        #pragma warning disable CS1998
         public async Task<bool> SendEmailAsync(EmailMessage email)
-        {
-           
+        {        
             return true;
         }
+        #pragma warning restore CS1998
     }
 }

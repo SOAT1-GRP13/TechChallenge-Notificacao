@@ -45,8 +45,8 @@ namespace Application.Pedidos.Handlers
                 {
                     var memoryCacheEntryOptions = new MemoryCacheEntryOptions
                     {
-                        AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5),
-                        SlidingExpiration = TimeSpan.FromMinutes(3)
+                        AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(20),
+                        SlidingExpiration = TimeSpan.FromMinutes(10)
                     };
 
                     if (!_memoryCache.TryGetValue(input.PedidoDto.PedidoId, out NotificacaoEnviadaPedidoDto notificacao))
