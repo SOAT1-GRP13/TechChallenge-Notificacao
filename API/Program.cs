@@ -70,7 +70,7 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 
-app.UsePathBase(new PathString("/producao"));
+app.UsePathBase(new PathString("/notificacao"));
 app.UseRouting();
 
 app.UseSwagger();
