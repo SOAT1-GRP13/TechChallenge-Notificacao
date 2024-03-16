@@ -1,0 +1,31 @@
+{
+  "family": "notificacao-api",
+  "containerDefinitions": [
+      {
+          "name": "notificacao-api",
+          "image": "christiandmelo/tech-challenge-soat1-grp13-notificacao:V1.0.3",
+          "cpu": 0,
+          "portMappings": [
+              {
+                  "containerPort": 80,
+                  "hostPort": 80,
+                  "protocol": "tcp",
+                  "appProtocol": "http"
+              }
+          ],
+          "essential": true,
+          "environment": [],
+          "mountPoints": [],
+          "volumesFrom": [],
+          "systemControls": []
+      }
+  ],
+  "taskRoleArn": "arn:aws:iam::834794241069:role/taskRole",
+  "executionRoleArn": "arn:aws:iam::834794241069:role/taskRole",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": [
+      "FARGATE"
+  ],
+  "cpu": "256",
+  "memory": "512"
+}
