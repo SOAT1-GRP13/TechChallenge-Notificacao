@@ -27,7 +27,7 @@ if (builder.Environment.IsProduction())
 {
     logger.LogInformation("Ambiente de Producao detectado.");
 
-    builder.Configuration.AddAmazonSecretsManager("us-west-2", "producao-secret");
+    builder.Configuration.AddAmazonSecretsManager("us-west-2", "notificacao-secret");
 
     connectionString = builder.Configuration.GetSection("ConnectionString").Value ?? string.Empty;
 
